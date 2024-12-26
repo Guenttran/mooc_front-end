@@ -10,6 +10,11 @@ const EmployeesLazy = lazy(() => import("../page/employee/Employees.jsx"));
 const NotFoundLazy = lazy(() => import("../page/error/NotFound.jsx"));
 const LoginLazy = lazy(() => import("../page/login/Login.jsx"));
 const EmployeeAddLazy = lazy(() => import("../page/employee/EmployeeAdd.jsx"));
+const ScheduleLazy = lazy(() => import("../page/schedule/Schedule.jsx"));
+const ScheduleDetailLazy = lazy(() => import("../page/schedule/ScheduleDetail.jsx"));
+const CalendarPageLazy = lazy(() => import("../page/schedule/CalendarPage.jsx"));
+
+
 const router = createBrowserRouter([
     {
         path:"/",
@@ -21,22 +26,48 @@ const router = createBrowserRouter([
               element: <DashboardLazy />,
             },
             {
-                path:"/employees",
+                path:"/users",
                 children:[
                     {
                         path:"",
                         element: <EmployeesLazy />
                     },
                     {
-                        path:"/employees/:id",
+                        path:"/users/:id",
                         element: <EmployeeDetailLazy/>
                     },
                     {
-                        path:"/employees/add",
+                        path:"/users/add",
                         element: <EmployeeAddLazy/>
                     }
                 ]
             },
+
+            {
+                path:"/schedule",
+                children:[
+                    {
+                        path:"",
+                        element: <ScheduleLazy />
+                    },
+                    {
+                        path:"/schedule/:id",
+                        element: <ScheduleDetailLazy/>
+                    }
+                ]
+            },
+
+            {
+                path:"/calendar",
+                children:[
+                    {
+                        path:"",
+                        element: <CalendarPageLazy />
+                    },
+                ]
+            },
+
+
             {
                 path:"/products",
                 element: <Products/>

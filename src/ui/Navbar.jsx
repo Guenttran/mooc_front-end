@@ -5,7 +5,9 @@ import {MdNightlight} from "react-icons/md";
 import {AiFillAppstore} from "react-icons/ai";
 
 function Navbar() {
+
     return (
+
         <nav className="fixed z-30 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
             <div className="mx-auto flex flex-wrap items-center justify-between">
                 <div className="w-full p-3 lg:px-5 lg:pl-3">
