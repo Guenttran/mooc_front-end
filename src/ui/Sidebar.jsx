@@ -10,6 +10,8 @@ import {FaChevronDown} from "react-icons/fa";
 
 function Sidebar() {
     const [userDropdown, setUserDropdown] = useState(false);
+    const [scheduleDropdown, setScheduleDropdown] = useState(false);
+
     return (
         <div className="lg:!block hidden">
             <aside aria-label="Sidebar with multi-level dropdown example"
@@ -22,11 +24,11 @@ function Sidebar() {
                                     <div className="relative w-full">
                                         <div
                                             className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                            <svg stroke="currentColor" fill="currentColor"  
+                                            <svg stroke="currentColor" fill="currentColor"
                                                  viewBox="0 0 20 20"
                                                  className="h-5 w-5 text-gray-500 dark:text-gray-400" height="1em"
                                                  width="1em" xmlns="http://www.w3.org/2000/svg">
-                                                <path  
+                                                <path
                                                       d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
                                                        ></path>
                                             </svg>
@@ -75,6 +77,49 @@ function Sidebar() {
                                         </ul>
                                        }
                                     </li>
+
+                                    {/* Schedule */}
+                                    <li>
+                                        <button
+                                            onClick={() => setScheduleDropdown(!scheduleDropdown)}
+                                            className="group flex w-full items-center rounded-lg p-2 text-base font-medium text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                                            title="Schedule"
+                                        >
+                                            <HiAdjustments className="text-2xl" />
+                                            <span className="ml-3 flex-1 whitespace-nowrap text-left">
+                                            Schedule
+                                        </span>
+                                            {!scheduleDropdown ? (
+                                                <GrFormNext className="text-2xl" />
+                                            ) : (
+                                                <FaChevronDown />
+                                            )}
+                                        </button>
+                                        {scheduleDropdown && (
+                                            <ul className="space-y-2 py-2 pl-8">
+                                                <li>
+                                                    <NavLink
+                                                        to="/schedule"
+                                                        className="flex items-center justify-center rounded-lg p-2 text-base font-medium text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                                                    >
+                                                        Schedule List
+                                                    </NavLink>
+                                                </li>
+                                            </ul>
+                                        )}
+                                    </li>
+
+                                    {/* Calendar */}
+                                    <li>
+                                        <NavLink
+                                            to="/calendar"
+                                            className="flex items-center rounded-lg p-2 text-base font-medium text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                                        >
+                                            <HiAdjustments className="text-2xl" />
+                                            <span className="ml-3 flex-1 whitespace-nowrap">Calendar</span>
+                                        </NavLink>
+                                    </li>
+
 
                                 </ul>
 
