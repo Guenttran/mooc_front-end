@@ -1,29 +1,37 @@
-import {useState} from "react";
-import FullCalendar from "@fullcalendar/react";
-import dayGridPlugin from '@fullcalendar/daygrid';
-import timeGridPlugin from '@fullcalendar/timegrid';
-import interactionPlugin from '@fullcalendar/interaction';
+import { Calendar, dateFnsLocalizer } from "react-big-calendar";
+import "react-big-calendar/lib/css/react-big-calendar.css";
+import format from "date-fns/format";
+import parse from "date-fns/parse";
+import startOfWeek from "date-fns/startOfWeek";
+import getDay from "date-fns/getDay";
+import enUS from "date-fns/locale/en-US";
+import { Paper } from "@mui/material";
 
-const Calendar = () => {
-    const [events, setEvents] = useState([]);
+const locales = {
+    "en-US": enUS,
+};
 
-    const handleDateClick = (info) => {
-        const title = prompt('Input event title: ');
-        if (title) {
-            setEvents([...events, { title, start: info.dateStr }]);
-        }
-    };
+const localizer = dateFnsLocalizer({
+    format,
+    parse,
+    startOfWeek,
+    getDay,
+    locales,
+});
 
+const CalendarComponent = ({ schedules, onSelectEvent }) => {
     return (
-        <FullCalendar
-            plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-            initialView="dayGridMonth"
-            editable={true}
-            selectable={true}
-            events={events}
-            dateClick={handleDateClick}
-        />
+        <Paper elevation={3} sx={{ padding: 2 }}>
+            <Calendar
+                localizer={localizer}
+                events={schedules}
+                startAccessor="start"
+                endAccessor="end"
+                style={{ height: 500 }}
+                onSelectEvent={onSelectEvent}
+            />
+        </Paper>
     );
 };
 
-export default Calendar;
+export default CalendarComponent;
