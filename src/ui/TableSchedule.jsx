@@ -38,14 +38,14 @@ function TableSchedule({ data, isLoading, error }) {
                                     <tbody className="divide-y divide-gray-200 bg-white dark:divide-gray-700 dark:bg-gray-800">
                                     {data.map((item, index) => (
                                         <tr
-                                            key={item.id}
+                                            key={item.scheduleId}
                                             data-testid="table-row-element"
                                             className="hover:bg-gray-100 dark:hover:bg-gray-700"
                                         >
-                                            <td className="px-6 py-4">{item.title}</td>
+                                            <td className="px-6 py-4">{item.scheduleTitle}</td>
                                             <td className="px-6 py-4">{item.candidateName}</td>
                                             <td className="px-6 py-4">{item.interviewer}</td>
-                                            <td className="px-6 py-4">{item.schedule}</td>
+                                            <td className="px-6 py-4">{item.date}: {item.startTime}{" - "}{item.endTime}</td>
                                             <td className="px-6 py-4">{item.result}</td>
                                             <td className="px-6 py-4">{item.status}</td>
                                             <td className="px-6 py-4">{item.job}</td>
@@ -54,6 +54,7 @@ function TableSchedule({ data, isLoading, error }) {
                                                     <button
                                                         className="text-blue-600 hover:text-blue-900"
                                                         title="View"
+                                                        onClick={() => handleEdit(item.id)}
                                                     >
                                                         <FaEye />
                                                     </button>

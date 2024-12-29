@@ -9,7 +9,7 @@ import {
     Paper,
     Grid,
 } from "@mui/material";
-import CalendarComponent from "./Calendar";
+import CalendarComponent from "./Calendar.jsx";
 
 const CalendarPage = () => {
     const [schedules, setSchedules] = useState([]);

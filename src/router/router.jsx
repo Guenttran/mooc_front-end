@@ -1,6 +1,7 @@
 import {createBrowserRouter} from "react-router-dom";
 import Products from "../page/product/Products.jsx";
 import {lazy} from "react";
+import ScheduleAdd from "../page/schedule/ScheduleAdd.jsx";
 
 const LayoutLazy = lazy(() => import("../ui/Layout.jsx"));
 const ErrorPageLazy = lazy(() => import("../page/error/ErrorPage.jsx"));
@@ -12,7 +13,8 @@ const LoginLazy = lazy(() => import("../page/login/Login.jsx"));
 const EmployeeAddLazy = lazy(() => import("../page/employee/EmployeeAdd.jsx"));
 const ScheduleLazy = lazy(() => import("../page/schedule/Schedule.jsx"));
 const ScheduleDetailLazy = lazy(() => import("../page/schedule/ScheduleDetail.jsx"));
-const CalendarPageLazy = lazy(() => import("../page/schedule/CalendarPage.jsx"));
+const CalendarPageLazy = lazy(() => import("../page/calendar/CalendarPage.jsx"));
+const ScheduleAddLazy = lazy(() => import("../page/schedule/ScheduleAdd.jsx"));
 
 
 const router = createBrowserRouter([
@@ -49,6 +51,10 @@ const router = createBrowserRouter([
                     {
                         path:"",
                         element: <ScheduleLazy />
+                    },
+                    {
+                        path:"/schedule/add",
+                        element: <ScheduleAddLazy></ScheduleAddLazy>
                     },
                     {
                         path:"/schedule/:id",

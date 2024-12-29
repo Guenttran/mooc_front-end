@@ -2,60 +2,42 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { IoMdAddCircle, IoMdHome } from "react-icons/io";
 import { GrNext } from "react-icons/gr";
-import useDebounce from "../../hook/useDebounce.jsx";
 import TableSchedule from "../../ui/TableSchedule.jsx";
 import Pagination from "../../ui/Pagination.jsx";
+import { useGetSchedulesQuery } from "../../service/scheduleService";
+import {usePrefetch} from "../../service/scheduleService.js";
 
 function Schedule() {
     const [search, setSearch] = useState("");
-    const [page, setPage] = useState(1);
+    const [page, setPage] = useState(0);
     const [size, setSize] = useState(5);
 
-    const debouncedSearchTerm = useDebounce(search, 500);
+    const prefetchSearch = usePrefetch("getSchedules")
 
-    // Fake dữ liệu thay vì API
-    const mockData = {
-        content: [
-            {
-                id: 1,
-                title: "Interview Senior Backend Developer",
-                candidateName: "Nguyễn Anh Đức",
-                interviewer: "Nguyễn Khắc Hoàn",
-                schedule: "22/02/2022 09:00 - 10:30",
-                result: "N/A",
-                status: "New",
-                job: "Dev Ov",
-            },
-            {
-                id: 2,
-                title: "Interview Junior Mobile Developer",
-                candidateName: "Trần Văn Bình",
-                interviewer: "Phạm Ngọc Thành",
-                schedule: "23/02/2022 14:00 - 15:30",
-                result: "Pending",
-                status: "Ongoing",
-                job: "Dev Mob",
-            },
-        ],
-        totalPages: 5,
-        totalElements: 25,
-        size: 5,
-        number: page,
-    };
+    // Sử dụng RTK Query để fetch dữ liệu
+    const { data, error, isLoading } = useGetSchedulesQuery({ search, page, size });
+
+    console.log("Data:", data);
+    console.log("Error:", error);
+    console.log("Loading:", isLoading);
 
     const handleSearchChange = (e) => {
         setSearch(e.target.value);
-        setPage(1);
+        setPage(1); // Reset lại page khi tìm kiếm
     };
 
-    const handleNextPage = (totalPages) => {
-        if (page < totalPages) setPage(page + 1);
-    };
-
-    const handlePreviousPage = () => {
-        if (page > 1) setPage(page - 1);
-    };
-
+    const handleNextPage = (totalPage)=>{
+        setPage( page < totalPage ? page + 1 : page);
+    }
+    const handlePreviousPage = ()=>{
+        setPage(page < 1 ? page : page - 1 );
+    }
+    const handleNextPrefetch= (totalPage)=>{
+        prefetchSearch({search,page: page < totalPage ? page + 1 : page,size});
+    }
+    const handlePreviousPrefetch= ()=>{
+        prefetchSearch({search,page: page < 1 ? page : page - 1,size});
+    }
     return (
         <>
             <div className="block items-center justify-between border-b border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800 sm:flex">
@@ -118,17 +100,26 @@ function Schedule() {
 
             {/* Table */}
             <div className="mt-6">
-                <TableSchedule data={mockData.content} isLoading={false} error={false} />
+                {isLoading ? (
+                    <div>Loading...</div>
+                ) : error ? (
+                    <div>Error fetching schedules.</div>
+                ) : (
+                    <TableSchedule data={data?.content || []} isLoading={isLoading} error={!!error} />
+                )}
             </div>
 
-            <Pagination
-                totalPage={mockData.totalPages}
-                totalElement={mockData.totalElements}
-                size={mockData.size}
-                page={mockData.number}
-                handleNextPage={() => handleNextPage(mockData.totalPages)}
-                handlePreviousPage={handlePreviousPage}
-            />
+            <Pagination totalPage={data?.totalPages}
+                        totalElement = {data?.totalElements}
+                        size = {data?.size}
+                        page = {data?.number}
+
+                        handleNextPage = {handleNextPage}
+                        handlePreviousPage = {handlePreviousPage}
+                        handleNextPrefetch = {handleNextPrefetch}
+                        handlePreviousPrefetch = {handlePreviousPrefetch}
+            ></Pagination>
+
         </>
     );
 }

@@ -40,6 +40,9 @@ export const scheduleService = createApi({
             }),
             invalidatesTags: ['schedule'],
         }),
+        getAddFormData: builder.query({
+            query: () => "schedule/form-data",
+        }),
     }),
 });
 
@@ -49,5 +52,6 @@ export const {
     useAddScheduleMutation,
     useUpdateScheduleMutation,
     useDeleteScheduleMutation,
+    useGetAddFormDataQuery,
     usePrefetch,
 } = scheduleService;

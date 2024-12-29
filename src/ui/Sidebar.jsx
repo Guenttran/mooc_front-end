@@ -109,7 +109,7 @@ function Sidebar() {
                                         )}
                                     </li>
 
-                                    {/* Calendar */}
+                                    {/* calendar */}
                                     <li>
                                         <NavLink
                                             to="/calendar"
