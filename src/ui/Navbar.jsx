@@ -21,7 +21,7 @@ function Navbar() {
                                                                            className="mr-3 h-6 sm:h-8"/><span
                                 className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">Flowbite</span></a>
                             <form className="ml-16 hidden md:block"><label
-                                className="text-sm font-medium text-gray-900 dark:text-gray-300 sr-only"
+                                  className="text-sm font-medium text-gray-900 dark:text-gray-300 sr-only"
                                 htmlFor="search">Search</label>
                                 <div className="flex">
                                     <div className="relative w-full">

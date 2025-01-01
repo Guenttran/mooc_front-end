@@ -22,13 +22,13 @@ function Sidebar() {
                                     <div className="relative w-full">
                                         <div
                                             className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                            <svg stroke="currentColor" fill="currentColor"  
+                                            <svg stroke="currentColor" fill="currentColor"
                                                  viewBox="0 0 20 20"
                                                  className="h-5 w-5 text-gray-500 dark:text-gray-400" height="1em"
                                                  width="1em" xmlns="http://www.w3.org/2000/svg">
-                                                <path  
-                                                      d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                                                       ></path>
+                                                <path
+                                                    d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                                                ></path>
                                             </svg>
                                         </div>
                                         <input
@@ -41,8 +41,8 @@ function Sidebar() {
                                     data-testid="flowbite-sidebar-item-group">
                                     <li>
                                         <NavLink to={"/"} aria-labelledby="flowbite-sidebar-item-:r6:"
-                                           className="flex items-center justify-center rounded-lg p-2 text-base font-medium text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                                           href="/">
+                                                 className="flex items-center justify-center rounded-lg p-2 text-base font-medium text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                                                 href="/">
                                             <RiDashboardFill className="text-2xl" />
                                             <span className="px-3 flex-1 whitespace-nowrap"
                                                   data-testid="flowbite-sidebar-item-content"
@@ -52,28 +52,40 @@ function Sidebar() {
                                             </span>
                                         </NavLink>
                                     </li>
-                                   <li>
+                                    <li>
                                         <button onClick={()=>setUserDropdown(!userDropdown)}
-                                            className="group flex w-full items-center rounded-lg p-2 text-base font-medium text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                                            id="flowbite-sidebar-collapse-:rd:" title="Employees" type="button">
+                                                className="group flex w-full items-center rounded-lg p-2 text-base font-medium text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                                                id="flowbite-sidebar-collapse-:rd:" title="Employees" type="button">
 
                                             <FaUserGroup className="text-2xl"/>
                                             <span className="ml-3 flex-1 whitespace-nowrap text-left"
                                                   data-testid="flowbite-sidebar-collapse-label">Employees</span>
                                             { !userDropdown ? <GrFormNext className="text-2xl"/>: <FaChevronDown />}
                                         </button>
-                                       { userDropdown &&  <ul aria-labelledby="flowbite-sidebar-collapse-:rd:" className="space-y-2 py-2">
+                                        { userDropdown && <ul aria-labelledby="flowbite-sidebar-collapse-:rd:"
+                                                              className="space-y-2 py-2">
                                             <li>
-                                                <NavLink to="/users" aria-labelledby="flowbite-sidebar-item-:r1n:"
-                                                   className="flex items-center justify-center rounded-lg p-2 text-base font-medium text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 group w-full pl-8 transition duration-75 bg-gray-100 dark:bg-gray-700">
-                                                    <span className="px-3 flex-1 whitespace-nowrap" data-testid="flowbite-sidebar-item-content"
-                                                                            id="flowbite-sidebar-item-:r1n:">
-                                                        Employees list
+                                                <NavLink to="/employees" aria-labelledby="flowbite-sidebar-item-:r1n:"
+                                                         className="flex items-center justify-center rounded-lg p-2 text-base font-medium text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 group w-full pl-8 transition duration-75 bg-gray-100 dark:bg-gray-700">
+                                                    <span className="px-3 flex-1 whitespace-nowrap"
+                                                          data-testid="flowbite-sidebar-item-content"
+                                                          id="flowbite-sidebar-item-:r1n:">
+                                                        View Employees
+                                                    </span>
+                                                </NavLink>
+                                            </li>
+                                            <li>
+                                                <NavLink to="/employees/add" aria-labelledby="flowbite-sidebar-item-:r1n:"
+                                                         className="flex items-center justify-center rounded-lg p-2 text-base font-medium text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 group w-full pl-8 transition duration-75 bg-gray-100 dark:bg-gray-700">
+                                                    <span className="px-3 flex-1 whitespace-nowrap"
+                                                          data-testid="flowbite-sidebar-item-content"
+                                                          id="flowbite-sidebar-item-:r1n:">
+                                                        Add employee
                                                     </span>
                                                 </NavLink>
                                             </li>
                                         </ul>
-                                       }
+                                        }
                                     </li>
 
                                 </ul>
@@ -87,7 +99,8 @@ function Sidebar() {
                             </button>
                             <div>
                                 <div className="w-fit" data-testid="flowbite-tooltip-target">
-                                    <a href="/users/settings" className="inline-flex cursor-pointer justify-center rounded p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-700 dark:hover:text-white">
+                                    <a href="/users/settings"
+                                       className="inline-flex cursor-pointer justify-center rounded p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-700 dark:hover:text-white">
                                         <span  className="sr-only">Settings page</span>
                                         <IoMdSettings className="text-2xl"/>
                                     </a>
@@ -120,8 +133,8 @@ function Sidebar() {
                                                 <li>
                                                     <a href="#"
                                                        className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white">
-                                                    <div className="inline-flex items-center">
-                                                        <span className="whitespace-nowrap">English (US)</span></div>
+                                                        <div className="inline-flex items-center">
+                                                            <span className="whitespace-nowrap">English (US)</span></div>
 
                                                     </a>
                                                 </li>
