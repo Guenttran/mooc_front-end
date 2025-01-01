@@ -41,9 +41,9 @@ function Sidebar() {
                                     data-testid="flowbite-sidebar-item-group">
                                     <li>
                                         <NavLink to={"/"} aria-labelledby="flowbite-sidebar-item-:r6:"
-                                           className="flex items-center justify-center rounded-lg p-2 text-base font-medium text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                                           href="/">
-                                            <RiDashboardFill className="text-2xl" />
+                                                 className="flex items-center justify-center rounded-lg p-2 text-base font-medium text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                                                 href="/">
+                                            <RiDashboardFill className="text-2xl"/>
                                             <span className="px-3 flex-1 whitespace-nowrap"
                                                   data-testid="flowbite-sidebar-item-content"
                                                   id="flowbite-sidebar-item-:r6:">
@@ -52,28 +52,44 @@ function Sidebar() {
                                             </span>
                                         </NavLink>
                                     </li>
-                                   <li>
-                                        <button onClick={()=>setUserDropdown(!userDropdown)}
-                                            className="group flex w-full items-center rounded-lg p-2 text-base font-medium text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                                            id="flowbite-sidebar-collapse-:rd:" title="Employees" type="button">
+                                    <li>
+                                        <button onClick={() => setUserDropdown(!userDropdown)}
+                                                className="group flex w-full items-center rounded-lg p-2 text-base font-medium text-gray-900 transition duration-75 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                                                id="flowbite-sidebar-collapse-:rd:" title="Employees" type="button">
 
                                             <FaUserGroup className="text-2xl"/>
                                             <span className="ml-3 flex-1 whitespace-nowrap text-left"
                                                   data-testid="flowbite-sidebar-collapse-label">Employees</span>
-                                            { !userDropdown ? <GrFormNext className="text-2xl"/>: <FaChevronDown />}
+                                            {!userDropdown ? <GrFormNext className="text-2xl"/> : <FaChevronDown/>}
                                         </button>
-                                       { userDropdown &&  <ul aria-labelledby="flowbite-sidebar-collapse-:rd:" className="space-y-2 py-2">
+                                        {userDropdown && <ul aria-labelledby="flowbite-sidebar-collapse-:rd:"
+                                                             className="space-y-2 py-2">
                                             <li>
-                                                <NavLink to="/users" aria-labelledby="flowbite-sidebar-item-:r1n:"
-                                                   className="flex items-center justify-center rounded-lg p-2 text-base font-medium text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 group w-full pl-8 transition duration-75 bg-gray-100 dark:bg-gray-700">
-                                                    <span className="px-3 flex-1 whitespace-nowrap" data-testid="flowbite-sidebar-item-content"
-                                                                            id="flowbite-sidebar-item-:r1n:">
+                                                <NavLink to="/employees" aria-labelledby="flowbite-sidebar-item-:r1n:"
+                                                         className="flex items-center justify-center rounded-lg p-2 text-base font-medium text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 group w-full pl-8 transition duration-75 bg-gray-100 dark:bg-gray-700">
+                                                    <span className="px-3 flex-1 whitespace-nowrap"
+                                                          data-testid="flowbite-sidebar-item-content"
+                                                          id="flowbite-sidebar-item-:r1n:">
                                                         Employees list
                                                     </span>
                                                 </NavLink>
                                             </li>
                                         </ul>
-                                       }
+                                        }
+                                    </li>
+
+                                    <li>
+                                        <NavLink to={"/jobs"} aria-labelledby="flowbite-sidebar-item-:r6:"
+                                                 className="flex items-center justify-center rounded-lg p-2 text-base font-medium text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                                                 href="/">
+
+                                            <span className="px-3 flex-1 whitespace-nowrap"
+                                                  data-testid="flowbite-sidebar-item-content"
+                                                  id="flowbite-sidebar-item-:r6:">
+
+                                                Jobs
+                                            </span>
+                                        </NavLink>
                                     </li>
 
                                 </ul>
@@ -87,8 +103,9 @@ function Sidebar() {
                             </button>
                             <div>
                                 <div className="w-fit" data-testid="flowbite-tooltip-target">
-                                    <a href="/users/settings" className="inline-flex cursor-pointer justify-center rounded p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-700 dark:hover:text-white">
-                                        <span  className="sr-only">Settings page</span>
+                                    <a href="/users/settings"
+                                       className="inline-flex cursor-pointer justify-center rounded p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-700 dark:hover:text-white">
+                                        <span className="sr-only">Settings page</span>
                                         <IoMdSettings className="text-2xl"/>
                                     </a>
                                 </div>

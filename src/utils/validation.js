@@ -18,3 +18,30 @@ export const validateCandidate = yup.object({
     }),
 })
 
+export const validateJob = yup.object({
+    title: yup.string().required("Job title is required!"),
+    skills: yup.string().required("Skill is required!"),
+    startdate: yup
+        .date()
+        .required("Start date is required!")
+        .min(new Date(), "Start date cannot be in the past!"),
+        // .transform((value, originalValue) => {
+        //     const [day, month, year] = originalValue.split("/");
+        //     return new Date(`${year}-${month}-${day}`);
+        // })
+        // .typeError("Invalid date format. Use DD/MM/YYYY."),
+    enddate: yup
+        .date()
+        .required("End date is required!")
+        .when("startdate", (startdate, schema) =>
+            schema.min(startdate, "End date cannot be before start date!")
+        ),
+        // .transform((value, originalValue) => {
+        //     const [day, month, year] = originalValue.split("/");
+        //     return new Date(`${year}-${month}-${day}`);
+        // })
+        // .typeError("Invalid date format. Use DD/MM/YYYY."),
+    salaryrangeto: yup.string().required("salary range to is required!"),
+    benefits: yup.string().required("Benefits is required!"),
+    level: yup.string().required("Level is required!"),
+})

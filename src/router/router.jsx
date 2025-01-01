@@ -10,6 +10,10 @@ const EmployeesLazy = lazy(() => import("../page/employee/Employees.jsx"));
 const NotFoundLazy = lazy(() => import("../page/error/NotFound.jsx"));
 const LoginLazy = lazy(() => import("../page/login/Login.jsx"));
 const EmployeeAddLazy = lazy(() => import("../page/employee/EmployeeAdd.jsx"));
+const JobsLazy = lazy(() => import("../page/job/Jobs.jsx"));
+const JobsAddLazy = lazy(() => import("../page/job/JobAdd.jsx"));
+const JobDetailLazy = lazy(() => import("../page/job/JobDetail.jsx"));
+const JobEditLazy = lazy(() => import("../page/job/JobEdit.jsx"));
 const router = createBrowserRouter([
     {
         path:"/",
@@ -39,7 +43,33 @@ const router = createBrowserRouter([
             },
             {
                 path:"/products",
-                element: <Products/>
+                children:[
+                    {
+                        path:"",
+                        element: <Products/>
+                    }
+                ]
+            },
+            {
+                path:"/jobs",
+                children:[
+                    {
+                        path:"",
+                        element: <JobsLazy/>
+                    },
+                    {
+                        path:"/jobs/add",
+                        element: <JobsAddLazy/>
+                    },
+                    {
+                        path: "/jobs/view/:id",
+                        element: <JobDetailLazy/>
+                    },
+                    {
+                        path: "/jobs/edit/:id",
+                        element: <JobEditLazy/>
+                    }
+                ]
             },
         ]
     },
