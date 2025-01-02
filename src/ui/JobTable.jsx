@@ -13,7 +13,6 @@ function JobTable({data, isLoading, error}) {
                     <div className="overflow-hidden shadow">
                         <div data-testid="table-element"
                              className="relative overflow-x-auto shadow-md sm:rounded-lg">
-
                             <table
                                 className="w-full text-left text-sm text-gray-500 dark:text-gray-400 min-w-full divide-y divide-gray-200 dark:divide-gray-600">
                                 <thead
@@ -37,6 +36,7 @@ function JobTable({data, isLoading, error}) {
                                     <th className="px-6 py-3">Action</th>
                                 </tr>
                                 </thead>
+
                                 {data && (<tbody className="divide-y divide-gray-200 bg-white dark:divide-gray-700 dark:bg-gray-800">
                                 {data?.map((item, index) => (<tr key={item.id} data-testid="table-row-element"
                                                                  className="hover:bg-gray-100 dark:hover:bg-gray-700">
@@ -80,16 +80,16 @@ function JobTable({data, isLoading, error}) {
                                                 <span className="flex items-center rounded-md text-sm px-3 py-2">
                                                     <div className="flex items-center gap-x-2">
                                                         <FaEdit/>
-                                                        Edit Job
+                                                        Edit
                                                     </div>
                                                 </span>
                                                 </NavLink>
-                                                <NavLink to={"/Jobs/delete"+item.id}
+                                                <NavLink to={"/Jobs/delete/"+item.id}
                                                          className="text-white bg-red-700 border border-transparent hover:bg-red-800 focus:ring-4 focus:ring-red-300 disabled:hover:bg-red-800 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 dark:disabled:hover:bg-red-600 focus:!ring-2 p-0 font-medium rounded-lg">
                                                 <span className="flex items-center rounded-md text-sm px-3 py-2">
                                                     <div className="flex items-center gap-x-2">
                                                         <FaRegTrashAlt/>
-                                                    Delete Job
+                                                    Delete
                                                     </div>
                                                 </span>
                                                 </NavLink>
@@ -99,74 +99,7 @@ function JobTable({data, isLoading, error}) {
 
                                 ))}
                                 </tbody>)}
-
-
-                                 {/*bảng fix cứng làm ví dụ*/}
-                                 <tbody className="divide-y divide-gray-200 bg-white dark:divide-gray-700 dark:bg-gray-800">
-                                 <tr className="hover:bg-gray-100 dark:hover:bg-gray-700">
-                                     <td className="px-6 py-4 w-4 p-4">
-                                         <div className="flex items-center">
-                                             <input checked={checked}
-                                                    className="h-4 w-4 rounded border border-gray-300 bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600"
-                                                    type="checkbox" aria-describedby="checkbox-1"
-                                                    id="checkbox-1" value=""/><label htmlFor="checkbox-1"
-                                                                                     className="sr-only">checkbox</label>
-                                         </div>
-                                     </td>
-                                     <td className="px-6 py-4 whitespace-nowrap p-4 text-base font-medium text-gray-900 dark:text-white">job title(fix cung)
-                                     </td>
-                                     <td className="px-6 py-4 whitespace-nowrap p-4 text-base font-medium text-gray-900 dark:text-white">Spring, react
-                                     </td>
-                                     <td className="px-6 py-4 whitespace-nowrap p-4 text-base font-medium text-gray-900 dark:text-white">29/12/2024
-                                     </td>
-                                     <td className="px-6 py-4 whitespace-nowrap p-4 text-base font-medium text-gray-900 dark:text-white">29/12/2026
-                                     </td>
-                                     <td className="px-6 py-4 whitespace-nowrap p-4 text-base font-medium text-gray-900 dark:text-white">Fresher
-                                     </td>
-                                     <td className="px-6 py-4 whitespace-nowrap p-4 text-base font-normal text-gray-900 dark:text-white">
-                                         <div className="flex items-center">
-                                             Draft
-                                         </div>
-                                     </td>
-                                     <td className="px-6 py-4">
-                                         <div className="flex items-center gap-x-3 whitespace-nowrap">
-                                             <NavLink to={"/jobs/view/view"}
-                                                      className="text-white bg-green-900 hover:bg-green-800 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 focus:!ring-2 p-0 font-medium rounded-lg">
-                                                <span className="flex items-center rounded-md text-sm px-3 py-2">
-                                                    <div className="flex items-center gap-x-2">
-                                                        <FaStreetView/>
-                                                        view
-                                                    </div>
-                                                </span>
-                                             </NavLink>
-                                             <NavLink to={"/jobs/edit/edit"}
-                                                      className="text-white bg-blue-900 hover:bg-blue-800 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 focus:!ring-2 p-0 font-medium rounded-lg">
-                                                <span className="flex items-center rounded-md text-sm px-3 py-2">
-                                                    <div className="flex items-center gap-x-2">
-                                                        <FaEdit/>
-                                                        Edit
-                                                    </div>
-                                                </span>
-                                             </NavLink>
-                                             <NavLink to={"/jobs/"}
-                                                      className="text-white bg-red-700 border border-transparent hover:bg-red-800 focus:ring-4 focus:ring-red-300 disabled:hover:bg-red-800 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 dark:disabled:hover:bg-red-600 focus:!ring-2 p-0 font-medium rounded-lg">
-                                                <span className="flex items-center rounded-md text-sm px-3 py-2">
-                                                    <div className="flex items-center gap-x-2">
-                                                        <FaRegTrashAlt/>
-                                                    Delete
-                                                    </div>
-                                                </span>
-                                             </NavLink>
-                                         </div>
-                                     </td>
-                                 </tr>
-
-
-                                 </tbody>
                             </table>
-                            {/**/}
-                            {isLoading && <Spin></Spin>}
-                            {error && <p className="text-center font-bold text-red-500">Cannot found any data!</p>}
                         </div>
                     </div>
                 </div>

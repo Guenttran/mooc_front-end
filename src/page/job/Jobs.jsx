@@ -30,7 +30,6 @@ function Jobs() {
     // });
     const {data, isLoading, error} = useSearchAndPaginationQuery({search:debouncedSearchTerm,page,size});
 
-
     const handleChangeSearch = (e)=>{
         setSearch(e.target.value);
         setPage(1);
@@ -49,6 +48,35 @@ function Jobs() {
     const handlePreviousPrefetch= ()=>{
         prefetchSearch({search,page: page < 1 ? page : page - 1,size});
     }
+
+    //fake data
+    const mockData = {
+        content: [
+            {
+                id: 1,
+                title: "Backend Developer",
+                skills: "C++",
+                startdate: "02/02/2025",
+                enddate: "02/02/2027",
+                level:"fresher",
+                status: "Draft",
+            },
+            {
+                id: 2,
+                title: "Fullstack Developer",
+                skills: "C++",
+                startdate: "22/02/2025",
+                enddate: "22/02/2028",
+                level:"fresher",
+                status: "Draft",
+            },
+        ],
+        totalPages: 5,
+        totalElements: 30,
+        size: 5,
+        number: page,
+    };
+
 
     return (
         <>
@@ -120,7 +148,7 @@ function Jobs() {
                                     <span className="flex items-center rounded-md text-sm px-3 py-2">
                                         <div className="flex items-center gap-x-3">
                                             <IoMdAddCircle />
-                                            Add Fob
+                                            Add Job
                                         </div>
                                     </span>
                             </NavLink>
@@ -139,11 +167,11 @@ function Jobs() {
                 </div>
             </div>
             {/*table*/}
-            <JobTable data={data?.content} isLoading={isLoading} error={error?.error}></JobTable>
-            <Pagination totalPage={data?.totalPages}
-                        totalElement = {data?.totalElements}
-                        size = {data?.size}
-                        page = {data?.number}
+            <JobTable data={mockData.content} isLoading={isLoading} error={error?.error}></JobTable>
+            <Pagination totalPage={mockData.totalPages}
+                        totalElement = {mockData.totalElements}
+                        size = {mockData.size}
+                        page = {mockData.number}
 
                         handleNextPage = {handleNextPage}
                         handlePreviousPage = {handlePreviousPage}

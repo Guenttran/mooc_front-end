@@ -47,7 +47,7 @@ function JobEdit() {
         { value: 'communication', label: 'Communication' },
     ]
 
-    const level = [
+    const levels = [
         { value: 'fresher', label: 'Fresher' },
         { value: 'junior', label: 'Junior' },
         { value: 'senior', label: 'Senior' },
@@ -55,6 +55,21 @@ function JobEdit() {
         { value: 'manager', label: 'Manager' },
         { value: 'vice-head', label: 'Vice Head' },
     ]
+
+    //fake data
+    const job = {
+        title: "Interview Junior Business Analyst",
+        skills: skills.filter(skill => ["C++"].includes(skill.value)),
+        startdate: "02/02/2025",
+        enddate: "02/02/2027",
+        salaryrangefrom: "0",
+        salaryrangeto: "90",
+        benefits: benefits.filter(benefit => ["travel", "lunch"].includes(benefit.value)),
+        workingaddress: "Hanoi",
+        level: levels.filter(level => ["fresher"].includes(level.value)),
+        status: "draft",
+        description:"abcxyz",
+    };
 
 
     return (
@@ -77,10 +92,10 @@ function JobEdit() {
                             </li>
                             <li className="group flex items-center">
                                 <GrNext/>
-                                <NavLink to={"/candidates"}
+                                <NavLink to={"/jobs"}
                                          className="flex items-center text-sm m-2 font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
                                          data-testid="flowbite-breadcrumb-item">
-                                    Candidates
+                                    jobs
                                 </NavLink>
                             </li>
                             <li className="group flex items-center">
@@ -88,7 +103,7 @@ function JobEdit() {
                                 <span
                                     className="flex items-center m-2 text-sm font-medium text-gray-500 dark:text-gray-400"
                                     data-testid="flowbite-breadcrumb-item ">
-                                            Add candidate
+                                            Add job
                                         </span>
                             </li>
                         </ol>
@@ -106,7 +121,9 @@ function JobEdit() {
                                     <div className="relative w-full">
                                         <input type="text" {...register("title")}
                                                className="block w-full border disabled:cursor-not-allowed disabled:opacity-50 bg-gray-50 border-gray-300 text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 rounded-lg p-2.5 text-sm"
-                                               id="job-title" placeholder="type a tilte..."/>
+                                               id="job-title" placeholder="type a tilte..."
+                                        value={job.title}/>
+
 
                                     </div>
                                 </div>
@@ -123,6 +140,7 @@ function JobEdit() {
                                         options={skills}
                                         className="block w-full border disabled:cursor-not-allowed disabled:opacity-50 bg-gray-50 border-gray-300 text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 rounded-lg p-2.5 text-sm"
                                         classNamePrefix="select"
+                                        defaultValue={job.skills}
                                 />
                                 <p className="text-red-500 pt-2 pb-2">{errors?.skills?.message}</p>
                             </div>
@@ -139,6 +157,7 @@ function JobEdit() {
                                            className="block w-full border disabled:cursor-not-allowed disabled:opacity-50 bg-gray-50 border-gray-300 text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 rounded-lg p-2.5 text-sm"
                                            id="start-date"
                                            placeholder="DD/MM/YYYY"
+                                           value={job.startdate}
                                     />
                                 </div>
                                 <p className="text-red-500">{errors.startdate?.message}</p>
@@ -156,6 +175,7 @@ function JobEdit() {
                                            className="block w-full border disabled:cursor-not-allowed disabled:opacity-50 bg-gray-50 border-gray-300 text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 rounded-lg p-2.5 text-sm"
                                            id="end-date"
                                            placeholder="DD/MM/YYYY"
+                                           value={job.enddate}
                                     />
                                 </div>
                                 <p className="text-red-500">{errors.enddate?.message}</p>
@@ -167,10 +187,12 @@ function JobEdit() {
                                 <div className="flex mt-2">
                                     <input type="text"
                                            className="block w-full border disabled:cursor-not-allowed disabled:opacity-50 bg-gray-50 border-gray-300 text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 rounded-lg p-2.5 text-sm"
-                                           id="salary-range-start" name="salary-range-start" placeholder="From"/>
+                                           id="salary-range-start" name="salary-range-start" placeholder="From"
+                                           value={job.salaryrangefrom}/>
                                     <input type="text"  {...register("salaryrangeto")}
                                            className="block w-full border disabled:cursor-not-allowed disabled:opacity-50 bg-gray-50 border-gray-300 text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 rounded-lg p-2.5 text-sm"
-                                           id="salary-range" name="salary-range" placeholder="To"/>
+                                           id="salary-range" name="salary-range" placeholder="To"
+                                           value={job.salaryrangeto}/>
                                 </div>
                                 <p className="text-red-500">{errors?.salaryrangeto?.message}</p>
                             </div>
@@ -186,6 +208,7 @@ function JobEdit() {
                                         options={benefits}
                                         className="block w-full border disabled:cursor-not-allowed disabled:opacity-50 bg-gray-50 border-gray-300 text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 rounded-lg p-2.5 text-sm"
                                         classNamePrefix="select"
+                                        defaultValue={job.benefits}
                                 />
                                 <p className="text-red-500 pt-2 pb-2">{errors?.benefits?.message}</p>
                             </div>
@@ -199,7 +222,8 @@ function JobEdit() {
                                         <input type="text"
                                                className="block w-full border disabled:cursor-not-allowed disabled:opacity-50 bg-gray-50 border-gray-300 text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 rounded-lg p-2.5 text-sm"
                                                id="working-address" name="working-address"
-                                               placeholder="type an address"/>
+                                               placeholder="type an address"
+                                               value={job.workingaddress}/>
 
                                     </div>
                                 </div>
@@ -212,19 +236,24 @@ function JobEdit() {
                                 <Select {...register("level")}
                                         isMulti
                                         name="Benefits"
-                                        options={level}
+                                        options={levels}
                                         className="block w-full border disabled:cursor-not-allowed disabled:opacity-50 bg-gray-50 border-gray-300 text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 rounded-lg p-2.5 text-sm"
                                         classNamePrefix="select"
+                                        defaultValue={job.level}
                                 />
                                 <p className="text-red-500 pt-2 pb-2">{errors?.level?.message}</p>
                             </div>
 
                             <div>
                                 <label className="text-sm font-medium text-gray-900 dark:text-gray-300"
-                                       htmlFor="status">status <span
-                                    className=" w-full border disabled:cursor-not-allowed disabled:opacity-50 bg-gray-50 border-gray-300 text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 rounded-lg p-2.5 text-sm"> draft </span></label>
+                                       htmlFor="status">status <input
+                                    className=" w-full border disabled:cursor-not-allowed disabled:opacity-50 bg-gray-50 border-gray-300 text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 rounded-lg p-2.5 text-sm"
+                                    readOnly
+                                    value={job.status}
+                                /></label>
                                 <div className="flex mt-2">
                                     <div className="relative w-full">
+
                                     </div>
                                 </div>
                             </div>
@@ -237,7 +266,8 @@ function JobEdit() {
                                         <textarea type="text"
                                                   className="block w-full border disabled:cursor-not-allowed disabled:opacity-50 bg-gray-50 border-gray-300 text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 rounded-lg p-2.5 text-sm"
                                                   id="description" name="description" placeholder="description"
-                                                  required=""></textarea>
+                                                  required=""
+                                                  value={job.description}></textarea>
 
                                     </div>
                                 </div>
