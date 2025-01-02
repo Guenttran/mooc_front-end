@@ -2,13 +2,31 @@ import { FaEye, FaEdit, FaRegTrashAlt } from "react-icons/fa";
 import Spin from "./Spin.jsx";
 import {NavLink, useNavigate} from "react-router-dom";
 import { useState } from "react";
+import {useDeleteScheduleMutation} from "../service/scheduleService.js";
+
 
 function TableSchedule({ data, isLoading, error }) {
     const [checked, setChecked] = useState(false);
     const navigate = useNavigate();
+    const [deleteSchedule] = useDeleteScheduleMutation();
 
-    const handleEdit = (id) => {
-        navigate(`/schedule/${id}`);
+    const handleEdit = (scheduleId) => {
+        navigate(`/schedule/${scheduleId}`);
+    };
+    const handleView = (scheduleId) => {
+        navigate(`/schedule/${scheduleId}/detail`);
+    };
+
+    const handleDelete = async (scheduleId) => {
+        if (window.confirm("Are you sure you want to delete this schedule?")) {
+            try {
+                await deleteSchedule(scheduleId).unwrap();
+                alert("Schedule deleted successfully.");
+            } catch (error) {
+                console.error("Failed to delete the schedule:", error);
+                alert("Failed to delete the schedule. Please try again.");
+            }
+        }
     };
 
     return (
@@ -54,20 +72,22 @@ function TableSchedule({ data, isLoading, error }) {
                                                     <button
                                                         className="text-blue-600 hover:text-blue-900"
                                                         title="View"
-                                                        onClick={() => handleEdit(item.id)}
+                                                        onClick={() => handleView(item.scheduleId)}
                                                     >
                                                         <FaEye />
                                                     </button>
                                                     <button
                                                         className="text-green-600 hover:text-green-900"
                                                         title="Edit"
-                                                        onClick={() => handleEdit(item.id)}
+                                                        onClick={() => handleEdit(item.scheduleId)}
+
                                                     >
                                                         <FaEdit />
                                                     </button>
                                                     <button
                                                         className="text-red-600 hover:text-red-900"
                                                         title="Delete"
+                                                        onClick={() => handleDelete(item.scheduleId)}
                                                     >
                                                         <FaRegTrashAlt />
                                                     </button>

@@ -18,3 +18,38 @@ export const validateCandidate = yup.object({
     }),
 })
 
+export const validateSchedule = yup.object({
+    scheduleTitle: yup.string().required("Schedule title is required!"),
+    candidateName: yup.string().required("Candidate name is required!"),
+    interviewer: yup.string().required("Interviewer is required!"),
+    recruiter: yup.string().required("Recruiter is required!"),
+    date: yup
+        .date()
+        .required("Date is required!")
+        .typeError("Invalid date format!"),
+    startTime: yup
+        .string()
+        .required("Start time is required!")
+        .matches(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, "Invalid time format!"),
+    endTime: yup
+        .string()
+        .required("End time is required!")
+        .matches(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, "Invalid time format!"),
+    location: yup.string().required("Location is required!"),
+    job: yup.string().required("Job title is required!"),
+    description: yup.string().nullable(), // Optional field
+    result: yup
+        .string()
+        .oneOf(["Pass", "Fail", "Pending"], "Invalid result status!")
+        .required("Result is required!"),
+    status: yup
+        .string()
+        .oneOf(["Scheduled", "Completed", "Cancelled"], "Invalid status!")
+        .required("Status is required!"),
+    meetingLink: yup
+        .string()
+        .url("Invalid URL format!")
+        .nullable(), // Optional field
+});
+
+

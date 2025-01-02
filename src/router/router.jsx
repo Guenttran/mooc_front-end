@@ -1,8 +1,6 @@
 import {createBrowserRouter} from "react-router-dom";
 import Products from "../page/product/Products.jsx";
 import {lazy} from "react";
-import ScheduleAdd from "../page/schedule/ScheduleAdd.jsx";
-
 const LayoutLazy = lazy(() => import("../ui/Layout.jsx"));
 const ErrorPageLazy = lazy(() => import("../page/error/ErrorPage.jsx"));
 const DashboardLazy = lazy(() => import("../page/dashboard/Dashboard.jsx"));
@@ -15,6 +13,7 @@ const ScheduleLazy = lazy(() => import("../page/schedule/Schedule.jsx"));
 const ScheduleDetailLazy = lazy(() => import("../page/schedule/ScheduleDetail.jsx"));
 const CalendarPageLazy = lazy(() => import("../page/calendar/CalendarPage.jsx"));
 const ScheduleAddLazy = lazy(() => import("../page/schedule/ScheduleAdd.jsx"));
+const ScheduleUpdateLazy = lazy(() => import("../page/schedule/ScheduleUpdate.jsx"));
 
 
 const router = createBrowserRouter([
@@ -57,7 +56,11 @@ const router = createBrowserRouter([
                         element: <ScheduleAddLazy></ScheduleAddLazy>
                     },
                     {
-                        path:"/schedule/:id",
+                        path:"/schedule/:scheduleId",
+                        element: <ScheduleUpdateLazy/>
+                    },
+                    {
+                        path:"/schedule/:scheduleId/detail",
                         element: <ScheduleDetailLazy/>
                     }
                 ]
@@ -70,10 +73,13 @@ const router = createBrowserRouter([
                         path:"",
                         element: <CalendarPageLazy />
                     },
+
+                    {
+                        path:"/calendar/:candidateName",
+                        element: <CalendarPageLazy />
+                    }
                 ]
             },
-
-
             {
                 path:"/products",
                 element: <Products/>

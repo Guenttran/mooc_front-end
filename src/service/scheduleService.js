@@ -7,9 +7,9 @@ export const scheduleService = createApi({
     tagTypes: ['schedule'],
     endpoints: (builder) => ({
         getSchedules: builder.query({
-            query: ({ search = '', page = 1, size = 5 }) => ({
+            query: ({ search = '', pages = 1, sizes = 5 }) => ({
                 url: "schedule",
-                params: { search, page, size },
+                params: { search, pages, sizes },
             }),
             providesTags: ['schedule'],
         }),
@@ -40,9 +40,6 @@ export const scheduleService = createApi({
             }),
             invalidatesTags: ['schedule'],
         }),
-        getAddFormData: builder.query({
-            query: () => "schedule/form-data",
-        }),
     }),
 });
 
@@ -52,6 +49,5 @@ export const {
     useAddScheduleMutation,
     useUpdateScheduleMutation,
     useDeleteScheduleMutation,
-    useGetAddFormDataQuery,
     usePrefetch,
 } = scheduleService;

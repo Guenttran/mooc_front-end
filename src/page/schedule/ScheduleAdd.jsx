@@ -2,11 +2,15 @@ import {NavLink} from "react-router-dom";
 import {IoMdHome} from "react-icons/io";
 import {GrNext} from "react-icons/gr";
 import {useState} from "react";
-import axios from "axios";
+import { useAddScheduleMutation } from "../../service/scheduleService.js";
+import {validateSchedule} from "../../utils/validation.js";
+import CalendarComponent from "./Calendar.jsx";
+import {Grid} from "@mui/material";
 
 function ScheduleAdd() {
     const [statusMessage, setStatusMessage] = useState("");
-
+    const [errors, setErrors] = useState({});
+    const [addSchedule, { isLoading }] = useAddScheduleMutation();
 
     const [data, setData] = useState({
         scheduleTitle: "",
@@ -25,13 +29,25 @@ function ScheduleAdd() {
     });
     const handleSubmitData = async (e) => {
         e.preventDefault();
-        try{
-            const response = axios.post("http://localhost:8080/schedule",data)
-            console.log(response.data);
-        } catch ( error) {
-            console.log(error);
+        try {
+            await validateSchedule.validate(data, { abortEarly: false });
+            setErrors({}); // Clear previous errors
+
+            await addSchedule(data).unwrap();
+            setStatusMessage("Schedule created successfully!");
+        } catch (error) {
+            if (error.name === "ValidationError") {
+                const validationErrors = {};
+                error.inner.forEach((err) => {
+                    validationErrors[err.path] = err.message;
+                });
+                setErrors(validationErrors);
+            } else {
+                console.error(error);
+                setStatusMessage("Failed to create schedule. Please try again.");
+            }
         }
-    }
+    };
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -101,6 +117,7 @@ function ScheduleAdd() {
                                        value={data.scheduleTitle}
                                        onChange={handleInputChange}
                                 />
+                                {errors.scheduleTitle && <div className="text-red-500">{errors.scheduleTitle}</div>}
                             </div>
                             <div>
                                 <label className="text-sm font-medium text-gray-900 dark:text-gray-300"
@@ -110,9 +127,8 @@ function ScheduleAdd() {
                                        placeholder="John Doe"
                                        value={data.candidateName}
                                        onChange={handleInputChange}
-
-
                                 />
+                                {errors.candidateName && <div className="text-red-500">{errors.candidateName}</div>}
                             </div>
                             <div>
                                 <label className="text-sm font-medium text-gray-900 dark:text-gray-300"
@@ -122,8 +138,8 @@ function ScheduleAdd() {
                                        placeholder="Jane Smith"
                                        value={data.interviewer}
                                        onChange={handleInputChange}
-
                                 />
+                                {errors.interviewer && <div className="text-red-500">{errors.interviewer}</div>}
                             </div>
                             <div>
                                 <label className="text-sm font-medium text-gray-900 dark:text-gray-300"
@@ -133,8 +149,8 @@ function ScheduleAdd() {
                                        placeholder="Recruiter Name"
                                        value={data.recruiter}
                                        onChange={handleInputChange}
-
                                 />
+                                {errors.recruiter && <div className="text-red-500">{errors.recruiter}</div>}
                             </div>
                             <div>
                                 <label className="text-sm font-medium text-gray-900 dark:text-gray-300"
@@ -143,8 +159,8 @@ function ScheduleAdd() {
                                        className="block w-full border bg-gray-50 border-gray-300 text-gray-900 rounded-lg p-2.5 text-sm"
                                        value={data.date}
                                        onChange={handleInputChange}
-
                                 />
+                                {errors.date && <div className="text-red-500">{errors.date}</div>}
                             </div>
                             <div>
                                 <label className="text-sm font-medium text-gray-900 dark:text-gray-300"
@@ -153,8 +169,8 @@ function ScheduleAdd() {
                                        className="block w-full border bg-gray-50 border-gray-300 text-gray-900 rounded-lg p-2.5 text-sm"
                                        value={data.startTime}
                                        onChange={handleInputChange}
-
                                 />
+                                {errors.startTime && <div className="text-red-500">{errors.startTime}</div>}
                             </div>
                             <div>
                                 <label className="text-sm font-medium text-gray-900 dark:text-gray-300"
@@ -163,8 +179,8 @@ function ScheduleAdd() {
                                        className="block w-full border bg-gray-50 border-gray-300 text-gray-900 rounded-lg p-2.5 text-sm"
                                        value={data.endTime}
                                        onChange={handleInputChange}
-
                                 />
+                                {errors.endTime && <div className="text-red-500">{errors.endTime}</div>}
                             </div>
                             <div>
                                 <label className="text-sm font-medium text-gray-900 dark:text-gray-300"
@@ -174,8 +190,8 @@ function ScheduleAdd() {
                                           placeholder="Interview details..."
                                           value={data.description}
                                           onChange={handleInputChange}
-
                                 ></textarea>
+                                {errors.description && <div className="text-red-500">{errors.description}</div>}
                             </div>
                             <div>
                                 <label className="text-sm font-medium text-gray-900 dark:text-gray-300"
@@ -185,8 +201,8 @@ function ScheduleAdd() {
                                        placeholder="Online or Office"
                                        value={data.location}
                                        onChange={handleInputChange}
-
                                 />
+                                {errors.location && <div className="text-red-500">{errors.location}</div>}
                             </div>
                             <div>
                                 <label className="text-sm font-medium text-gray-900 dark:text-gray-300"
@@ -196,8 +212,8 @@ function ScheduleAdd() {
                                        placeholder="https://meeting.link"
                                        value={data.meetingLink}
                                        onChange={handleInputChange}
-
                                 />
+                                {errors.meetingLink && <div className="text-red-500">{errors.meetingLink}</div>}
                             </div>
                             <div>
                                 <label className="text-sm font-medium text-gray-900 dark:text-gray-300"
@@ -207,8 +223,8 @@ function ScheduleAdd() {
                                        placeholder="Pass/Fail"
                                        value={data.result}
                                        onChange={handleInputChange}
-
                                 />
+                                {errors.result && <div className="text-red-500">{errors.result}</div>}
                             </div>
                             <div>
                                 <label className="text-sm font-medium text-gray-900 dark:text-gray-300"
@@ -218,8 +234,8 @@ function ScheduleAdd() {
                                        placeholder="Scheduled/Completed"
                                        value={data.status}
                                        onChange={handleInputChange}
-
                                 />
+                                {errors.status && <div className="text-red-500">{errors.status}</div>}
                             </div>
                             <div>
                                 <label className="text-sm font-medium text-gray-900 dark:text-gray-300"
@@ -229,8 +245,8 @@ function ScheduleAdd() {
                                        placeholder="Job Title"
                                        value={data.job}
                                        onChange={handleInputChange}
-
                                 />
+                                {errors.job && <div className="text-red-500">{errors.job}</div>}
                             </div>
                         </div>
                         <button
